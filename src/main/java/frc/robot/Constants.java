@@ -14,6 +14,7 @@ package frc.robot;
  * constants are needed, to reduce verbosity.
  */
 public final class Constants {
-    public final double maxVelAccel = 0.2;
-    public final double maxRotAccel = 0.2;
+    public static double maxVelAccel = 0.2;
+    public static double maxRotAccel = 0.2;
+    public static double servoAngle = 90;
 }

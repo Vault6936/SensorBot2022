@@ -10,7 +10,7 @@ import frc.robot.subsystems.IntakeSubsystem;
 
 
 /** An example command that uses an example subsystem. */
-public class intakeCommand extends CommandBase
+public class intakeReleaseCommand extends CommandBase
 {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final IntakeSubsystem subsystem;
@@ -21,7 +21,7 @@ public class intakeCommand extends CommandBase
      *
      * @param subsystem The subsystem used by this command.
      */
-    public intakeCommand(IntakeSubsystem subsystem, IntakeSubsystem.State state)
+    public intakeReleaseCommand(IntakeSubsystem subsystem, IntakeSubsystem.State state)
     {
         this.subsystem = subsystem;
         this.state = state;

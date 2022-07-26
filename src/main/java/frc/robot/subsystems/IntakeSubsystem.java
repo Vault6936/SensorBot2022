@@ -6,8 +6,10 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
+import frc.robot.Constants;
 
 
 public class IntakeSubsystem extends SubsystemBase
@@ -19,6 +21,8 @@ public class IntakeSubsystem extends SubsystemBase
     }
     MotorController vert = new WPI_VictorSPX(314159);
     MotorController intake = new WPI_VictorSPX(271828);
+
+    Servo setup = new Servo(3);
 
     private State state = State.IDLE;
     private final double inSpeed = 0.45;
@@ -57,6 +61,13 @@ public class IntakeSubsystem extends SubsystemBase
                 break;
             }
         }
+
+    public void releaseIntake() {
+        setup.setAngle(Constants.servoAngle);
+    }
+    public void storeIntake() {
+        setup.setAngle(0);
+    }
 }
 
 
