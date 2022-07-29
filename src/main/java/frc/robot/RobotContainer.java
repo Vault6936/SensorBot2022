@@ -25,17 +25,17 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class RobotContainer
 {
 
-    IO io = IO.getInstance(); //is a singleton
+    public static IO io = IO.getInstance(); //is a singleton
 
     private final driveSubsystem driveSubsystem = new driveSubsystem();
     private final turretSubsystem turretSubsystem = new turretSubsystem();
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
-    private final driveCommand driveCommand = new driveCommand(driveSubsystem,()-> IO.driveController.getRawAxis(1), ()-> IO.driveController.getRawAxis(0), ()-> IO.driveController.getRawAxis(2));
+    private final driveCommand driveCommand = new driveCommand(driveSubsystem,()-> io.driveController.getRawAxis(1), ()-> io.driveController.getRawAxis(0), ()-> io.driveController.getRawAxis(2));
     
     private final intakeCommand intakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN);
     private final intakeCommand intakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE);
-    private final turretCommand turretCommand = new turretCommand(turretSubsystem, ()-> IO.ballController.getRawAxis(3), ()-> IO.ballController.getRawAxis(4)); //3 and 4 are just placeholders for now
+    private final turretCommand turretCommand = new turretCommand(turretSubsystem, ()-> io.ballController.getRawAxis(3), ()-> io.ballController.getRawAxis(4)); //3 and 4 are just placeholders for now
 
     private final Command autoCommand = new ParallelCommandGroup(driveCommand);
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
