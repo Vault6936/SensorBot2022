@@ -6,8 +6,8 @@ plugins {
 }
 
 def javaVersion = JavaVersion.VERSION_11
-sourceCompatibility = javaVersion
-targetCompatibility = javaVersion
+sourceCompatibility = JavaVersion.VERSION_16
+targetCompatibility = JavaVersion.VERSION_16
 
 def ROBOT_MAIN_CLASS = "frc.robot.Main"
 
