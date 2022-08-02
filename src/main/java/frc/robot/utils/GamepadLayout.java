@@ -4,7 +4,11 @@ public class GamepadLayout {
     public int intakeInBtn;
     public int intakeOutBtn;
 
-    public GamepadLayout() {
+    public int driveYVel;
+    public int driveXVel;
+    public int driveRot;
+    public int turretHor;
+    public int turretVert;
 
-    }
+    public GamepadLayout() {}
 }

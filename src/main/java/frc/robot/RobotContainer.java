@@ -25,19 +25,19 @@ import frc.robot.subsystems.IntakeSubsystem;
 public class RobotContainer
 {
 
-    public static IO io = IO.getInstance(); //is a singleton
+    public static IO io = IO.getInstance();
 
     private final driveSubsystem driveSubsystem = new driveSubsystem();
     private final turretSubsystem turretSubsystem = new turretSubsystem();
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
 
-    private final driveCommand driveCommand = new driveCommand(driveSubsystem,()-> io.driveController.getRawAxis(1), ()-> io.driveController.getRawAxis(0), ()-> io.driveController.getRawAxis(2));
+    private final driveCommand driveCommand = new driveCommand(driveSubsystem, ()-> io.driveYVel.getRawValue(), ()-> io.driveXVel.getRawValue(), ()-> io.driveRot.getRawValue()); //done
     
-    private final intakeCommand intakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN);
-    private final intakeCommand intakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE);
-    private final turretCommand turretCommand = new turretCommand(turretSubsystem, ()-> io.ballController.getRawAxis(3), ()-> io.ballController.getRawAxis(4)); //3 and 4 are just placeholders for now
+    private final intakeCommand intakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN); //done
+    private final intakeCommand intakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE); //done
+    private final turretCommand turretCommand = new turretCommand(turretSubsystem, ()-> io.turretHor.getRawValue(), ()-> io.turretVert.getRawValue()); //3 and 4 are just placeholders for now
 
-    private final Command autoCommand = new ParallelCommandGroup(driveCommand);
+    //private final Command autoCommand = new ParallelCommandGroup(driveCommand);
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
 
     public RobotContainer()
@@ -45,7 +45,8 @@ public class RobotContainer
         // Configure the button bindings
         SmartDashboard.putString("booted", "Robot booted successfully.");
         configureButtonBindings();
-        CommandScheduler.getInstance().setDefaultCommand(driveSubsystem, driveCommand);
+        Constants.commandScheduler.setDefaultCommand(driveSubsystem, driveCommand);
+        Constants.commandScheduler.setDefaultCommand(turretSubsystem, turretCommand);
     }
     
     

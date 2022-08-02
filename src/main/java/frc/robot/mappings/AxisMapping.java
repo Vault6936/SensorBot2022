@@ -14,7 +14,7 @@ public class AxisMapping {
     private boolean overrideControl = false;
     private double overrideValue = 0.0;
     private boolean deadzone = true;
-    private double deadzoneValue = 0.05;//Constants.DeadzoneDefault;
+    private double deadzoneValue = Constants.deadZoneDefault;
 
     public AxisMapping(Builder builder) {
         this.joystick = builder.joystick;
@@ -143,7 +143,7 @@ public class AxisMapping {
         private boolean overrideControl = false;
         private double overrideValue = 0.0;
         private boolean deadzone = true;
-        private double deadzoneValue = 0.05;//Constants.DeadzoneDefault;
+        private double deadzoneValue = Constants.deadZoneDefault;
 
         public Builder(Joystick joystick, int axisID) {
             this.joystick = joystick;
