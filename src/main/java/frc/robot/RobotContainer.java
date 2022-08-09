@@ -37,6 +37,9 @@ public class RobotContainer
     private final intakeCommand intakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE); //done
     private final turretCommand turretCommand = new turretCommand(turretSubsystem, ()-> io.turretHor.getRawValue(), ()-> io.turretVert.getRawValue()); //3 and 4 are just placeholders for now
 
+    private final shooterCommand beginShootingCommand = new shooterCommand(turretSubsystem, true);
+    private final shooterCommand stopShootingCommand = new shooterCommand(turretSubsystem, false);
+
     //private final Command autoCommand = new ParallelCommandGroup(driveCommand);
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
 
@@ -59,6 +62,7 @@ public class RobotContainer
     private void configureButtonBindings()
     {
         io.intakeIn.getButton().whenPressed(intakeInCommand).whenReleased(intakeIdleCommand);
+        io.shooter.getButton().whenPressed(beginShootingCommand).whenReleased(stopShootingCommand);
         // Add button to command mappings here.
         // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html
     }

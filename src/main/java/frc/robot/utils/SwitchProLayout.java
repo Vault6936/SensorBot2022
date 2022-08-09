@@ -24,12 +24,13 @@ public class SwitchProLayout extends GamepadLayout {
     private static final int axsRY = 3;
 
     public SwitchProLayout() {
-        driveYVel = 1;
-        driveXVel = 0;
-        driveRot = 2;
+        driveYVel = axsLY;
+        driveXVel = axsLX;
+        driveRot = axsRX;
         intakeInBtn = btnX;
         intakeOutBtn = btnY;
         turretHor = 3;
         turretVert = 4;
+        shooterBtn = btnZL;
     }
 }

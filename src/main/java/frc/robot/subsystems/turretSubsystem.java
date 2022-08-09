@@ -6,16 +6,15 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import edu.wpi.first.math.MathUtil;
-import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 
 
 public class turretSubsystem extends SubsystemBase
 {
-    MotorController hor = new WPI_VictorSPX(23);
+    MotorController hor = new WPI_VictorSPX(23); //replace all the ids below with the correct numbers
     MotorController vert = new WPI_VictorSPX(22);
+    MotorController shooter = new WPI_VictorSPX(1);
 
     /** Creates a new subsystem. */
     public turretSubsystem() {}
@@ -33,5 +32,8 @@ public class turretSubsystem extends SubsystemBase
         vertVel *= 0.6;
         hor.set(horVel);
         vert.set(vertVel);
+    }
+    public void shoot(double vel) {
+        shooter.set(vel);
     }
 }

@@ -19,8 +19,9 @@ public class IntakeSubsystem extends SubsystemBase
         OUT,
         IDLE
     }
-    MotorController vert = new WPI_VictorSPX(314159);
-    MotorController intake = new WPI_VictorSPX(271828);
+    MotorController vert = new WPI_VictorSPX(314159); //remove this comment when CAN ids are set for every motor controller below
+    MotorController intake1 = new WPI_VictorSPX(271828);
+    MotorController intake2 = new WPI_VictorSPX(2);
 
     Servo setup = new Servo(3);
 
@@ -37,13 +38,19 @@ public class IntakeSubsystem extends SubsystemBase
     public void intakePeriodic() {
         switch (state) {
             case IN:
-                intake.set(inSpeed);
+                intake1.set(inSpeed);
+                intake2.set(inSpeed);
+                vert.set(1);
                 break;
             case OUT:
-                intake.set(outSpeed);
+                intake1.set(outSpeed);
+                intake2.set(inSpeed);
+                vert.set(-1);
                 break;
             case IDLE:
-                intake.set(0);
+                intake1.set(0);
+                intake2.set(0);
+                vert.set(0);
                 break;
         }
     }

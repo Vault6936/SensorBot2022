@@ -23,6 +23,8 @@ public class IO {
     ButtonMapping intakeIn;
     ButtonMapping intakeOut;
 
+    ButtonMapping shooter;
+
     AxisMapping turretHor;
     AxisMapping turretVert;
     private IO() {
@@ -35,6 +37,7 @@ public class IO {
         this.driveRot = new AxisMapping.Builder(this.driveController, driveLayout.driveRot).build();
         this.intakeIn = new ButtonMapping(this.ballController, driveLayout.intakeInBtn);
         this.intakeOut = new ButtonMapping(this.ballController, driveLayout.intakeOutBtn);
+        this.shooter = new ButtonMapping(this.ballController, ballLayout.shooterBtn);
         this.turretHor = new AxisMapping.Builder(ballController, ballLayout.turretHor).build();
         this.turretVert = new AxisMapping.Builder(ballController, ballLayout.turretVert).build();
     }

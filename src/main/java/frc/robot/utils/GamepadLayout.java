@@ -9,4 +9,5 @@ public abstract class GamepadLayout {
     public int driveRot;
     public int turretHor;
     public int turretVert;
+    public int shooterBtn;
 }
