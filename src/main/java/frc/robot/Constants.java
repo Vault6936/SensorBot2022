@@ -21,4 +21,27 @@ public final class Constants {
     public static double maxRotAccel = 0.2;
     public static double servoAngle = 90;
     public static final double deadZoneDefault = 0.05;
+
+    public static int DRIVE_CONTROLLER = 0;
+    public static int PAYLOAD_CONTROLLER = 1;
+
+
+    public static class CanIds
+    {
+        public static int DRIVE_MOTOR_FRONT_LEFT = 3;
+        public static int DRIVE_MOTOR_FRONT_RIGHT = 4;
+        public static int DRIVE_MOTOR_BACK_LEFT = 5;
+        public static int DRIVE_MOTOR_BACK_RIGHT = 6;
+
+        public static int INTAKE_UPTAKE = 18;
+
+        public static int INTAKE_BACK = 19;
+
+        public static int INTAKE_FRONT = 20;
+
+        public static int PAYLOAD_HORIZONTAL_AIM = 21;
+        public static int PAYLOAD_VERTICAL_AIM = 24;
+        public static int LAUNCHER_WHEEL_FRONT = 22;
+        public static int LAUNCHER_WHEEL_BACK = 23;
+    }
 }

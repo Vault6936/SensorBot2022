@@ -5,32 +5,38 @@
 
 package frc.robot.subsystems;
 
+import com.ctre.phoenix.motorcontrol.can.WPI_TalonSRX;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import edu.wpi.first.math.MathUtil;
 import edu.wpi.first.wpilibj.drive.MecanumDrive;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
-
+import frc.robot.Constants;
 
 
 public class driveSubsystem extends SubsystemBase
 {
-    MotorController frM = new WPI_VictorSPX(23);
-    MotorController flM = new WPI_VictorSPX(22);
-    MotorController brM = new WPI_VictorSPX(24);
-    MotorController blM = new WPI_VictorSPX(21);
+    MotorController frM = new WPI_TalonSRX(Constants.CanIds.DRIVE_MOTOR_FRONT_RIGHT);
+    MotorController flM = new WPI_TalonSRX(Constants.CanIds.DRIVE_MOTOR_FRONT_LEFT);
+    MotorController brM = new WPI_VictorSPX(Constants.CanIds.DRIVE_MOTOR_BACK_RIGHT);
+    MotorController blM = new WPI_TalonSRX(Constants.CanIds.DRIVE_MOTOR_BACK_LEFT);
 
-    MecanumDrive base = new MecanumDrive(flM, blM, frM, brM);
+    final MecanumDrive base;
 
     double lastYVel = 0;
     double lastXVel = 0;
 
     double lastRot = 0;
-    double maxVelAccel = 0.2;
+    double maxVelAccel = 0.01;
 
-    double maxRotAccel = 0.2;
+    double maxRotAccel = 0.01;
     /** Creates a new subsystem. */
-    public driveSubsystem() {}
+    public driveSubsystem() {
+        frM.setInverted(true);
+        brM.setInverted(true);
+        base = new MecanumDrive(flM, blM, frM, brM);
+
+    }
     
     
     @Override

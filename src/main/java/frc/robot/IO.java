@@ -28,8 +28,8 @@ public class IO {
     AxisMapping turretHor;
     AxisMapping turretVert;
     private IO() {
-        this.driveControllerPort = 0;
-        this.ballControllerPort = 1;
+        this.driveControllerPort = Constants.DRIVE_CONTROLLER;
+        this.ballControllerPort = Constants.PAYLOAD_CONTROLLER;
         this.driveController = new Joystick(driveControllerPort);
         this.ballController = new Joystick(ballControllerPort);
         this.driveYVel = new AxisMapping.Builder(this.driveController, driveLayout.driveYVel).build();

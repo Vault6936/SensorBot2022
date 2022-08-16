@@ -6,6 +6,8 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
+import com.revrobotics.CANSparkMax;
+import com.revrobotics.CANSparkMaxLowLevel;
 import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
@@ -14,20 +16,20 @@ import frc.robot.Constants;
 
 public class IntakeSubsystem extends SubsystemBase
 {
-    public static enum State {
+    public enum State {
         IN,
         OUT,
         IDLE
     }
-    MotorController vert = new WPI_VictorSPX(314159); //remove this comment when CAN ids are set for every motor controller below
-    MotorController intake1 = new WPI_VictorSPX(271828);
-    MotorController intake2 = new WPI_VictorSPX(2);
+    MotorController vert = new WPI_VictorSPX(Constants.CanIds.INTAKE_UPTAKE); //remove this comment when CAN ids are set for every motor controller below
+    MotorController intake1 = new CANSparkMax(Constants.CanIds.INTAKE_FRONT, CANSparkMaxLowLevel.MotorType.kBrushless);
+    MotorController intake2 = new WPI_VictorSPX(Constants.CanIds.INTAKE_BACK);
 
     Servo setup = new Servo(3);
 
     private State state = State.IDLE;
-    private final double inSpeed = 0.45;
-    private final double outSpeed = -0.45;
+    private final double inSpeed = -0.45;
+    private final double outSpeed = 0.45;
 
     public IntakeSubsystem() {}
     
@@ -40,17 +42,14 @@ public class IntakeSubsystem extends SubsystemBase
             case IN:
                 intake1.set(inSpeed);
                 intake2.set(inSpeed);
-                vert.set(1);
                 break;
             case OUT:
                 intake1.set(outSpeed);
-                intake2.set(inSpeed);
-                vert.set(-1);
+                intake2.set(outSpeed);
                 break;
             case IDLE:
                 intake1.set(0);
                 intake2.set(0);
-                vert.set(0);
                 break;
         }
     }
@@ -58,10 +57,10 @@ public class IntakeSubsystem extends SubsystemBase
     public void vertPeriodic() {
         switch (state) {
             case IN:
-                vert.set(inSpeed);
+                vert.set(-inSpeed);
                 break;
             case OUT:
-                vert.set(outSpeed);
+                vert.set(-outSpeed);
                 break;
             case IDLE:
                 vert.set(0);
@@ -69,6 +68,12 @@ public class IntakeSubsystem extends SubsystemBase
             }
         }
 
+        @Override
+        public void periodic()
+        {
+            vertPeriodic();
+            intakePeriodic();
+        }
     public void releaseIntake() {
         setup.setAngle(Constants.servoAngle);
     }

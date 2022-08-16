@@ -25,15 +25,6 @@ public class intakeCommand extends CommandBase
     {
         this.subsystem = subsystem;
         this.state = state;
-        switch (state) {
-            case IN:
-                subsystem.setState(IntakeSubsystem.State.IN);
-                break;
-            case OUT:
-                subsystem.setState(IntakeSubsystem.State.OUT);
-            case IDLE:
-                subsystem.setState(IntakeSubsystem.State.IDLE);
-        }
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
     }
@@ -45,19 +36,21 @@ public class intakeCommand extends CommandBase
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        subsystem.intakePeriodic();
-        subsystem.vertPeriodic();
+        switch (state) {
+            case IN:
+                subsystem.setState(IntakeSubsystem.State.IN);
+                break;
+            case OUT:
+                subsystem.setState(IntakeSubsystem.State.OUT);
+            case IDLE:
+                subsystem.setState(IntakeSubsystem.State.IDLE);
+        }
+//        subsystem.intakePeriodic();
+//        subsystem.vertPeriodic();
     }
     
     // Called once the command ends or is interrupted.
     @Override
     public void end(boolean interrupted) {}
-    
-    
-    // Returns true when the command should end.
-    @Override
-    public boolean isFinished()
-    {
-        return false;
-    }
+
 }
