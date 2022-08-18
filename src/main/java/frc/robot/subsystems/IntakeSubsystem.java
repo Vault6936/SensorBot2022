@@ -21,6 +21,10 @@ public class IntakeSubsystem extends SubsystemBase
         OUT,
         IDLE
     }
+    public enum Intakes {
+        INTAKE_FRONT,
+        INTAKE_BACK
+    }
     MotorController vert = new WPI_VictorSPX(Constants.CanIds.INTAKE_UPTAKE); //remove this comment when CAN ids are set for every motor controller below
     MotorController intake1 = new CANSparkMax(Constants.CanIds.INTAKE_FRONT, CANSparkMaxLowLevel.MotorType.kBrushless);
     MotorController intake2 = new WPI_VictorSPX(Constants.CanIds.INTAKE_BACK);
@@ -28,6 +32,10 @@ public class IntakeSubsystem extends SubsystemBase
     Servo setup = new Servo(3);
 
     private State state = State.IDLE;
+
+    private Intakes intakeMotor = Intakes.INTAKE_FRONT;
+
+    private MotorController intakeMotors[] = {intake1, intake2};
     private final double inSpeed = -0.45;
     private final double outSpeed = 0.45;
 
@@ -36,20 +44,18 @@ public class IntakeSubsystem extends SubsystemBase
     public void setState(State state) {
         this.state = state;
     }
+    public void setIntakeMotor(Intakes intakeMotor) {this.intakeMotor = intakeMotor;}
 
     public void intakePeriodic() {
         switch (state) {
             case IN:
-                intake1.set(inSpeed);
-                intake2.set(inSpeed);
+                intakeMotors[intakeMotor.ordinal()].set(inSpeed);
                 break;
             case OUT:
-                intake1.set(outSpeed);
-                intake2.set(outSpeed);
+                intakeMotors[intakeMotor.ordinal()].set(outSpeed);
                 break;
             case IDLE:
-                intake1.set(0);
-                intake2.set(0);
+                intakeMotors[intakeMotor.ordinal()].set(0);
                 break;
         }
     }

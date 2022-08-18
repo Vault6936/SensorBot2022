@@ -27,8 +27,10 @@ public class SwitchProLayout extends GamepadLayout {
         driveYVel = axsLY;
         driveXVel = axsLX;
         driveRot = axsRX;
-        intakeInBtn = btnX;
-        intakeOutBtn = btnY;
+        frontIntakeInBtn = btnX;
+        frontIntakeOutBtn = btnY;
+        backIntakeInBtn = btnA;
+        backIntakeOutBtn = btnB;
         turretHor = 2;
         turretVert = 3;
         shooterBtn = btnZL;

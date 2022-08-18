@@ -1,8 +1,10 @@
 package frc.robot.utils;
 
 public abstract class GamepadLayout {
-    public int intakeInBtn;
-    public int intakeOutBtn;
+    public int frontIntakeInBtn;
+    public int frontIntakeOutBtn;
+    public int backIntakeInBtn;
+    public int backIntakeOutBtn;
 
     public int driveYVel;
     public int driveXVel;

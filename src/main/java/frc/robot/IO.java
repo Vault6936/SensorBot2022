@@ -20,8 +20,10 @@ public class IO {
     AxisMapping driveYVel;
     AxisMapping driveXVel;
     AxisMapping driveRot;
-    ButtonMapping intakeIn;
-    ButtonMapping intakeOut;
+    ButtonMapping frontIntakeIn;
+    ButtonMapping frontIntakeOut;
+    ButtonMapping backIntakeIn;
+    ButtonMapping backIntakeOut;
 
     ButtonMapping shooter;
 
@@ -35,8 +37,10 @@ public class IO {
         this.driveYVel = new AxisMapping.Builder(this.driveController, driveLayout.driveYVel).build();
         this.driveXVel = new AxisMapping.Builder(this.driveController, driveLayout.driveXVel).build();
         this.driveRot = new AxisMapping.Builder(this.driveController, driveLayout.driveRot).build();
-        this.intakeIn = new ButtonMapping(this.ballController, driveLayout.intakeInBtn);
-        this.intakeOut = new ButtonMapping(this.ballController, driveLayout.intakeOutBtn);
+        this.frontIntakeIn = new ButtonMapping(this.ballController, ballLayout.frontIntakeInBtn);
+        this.frontIntakeOut = new ButtonMapping(this.ballController, ballLayout.frontIntakeOutBtn);
+        this.backIntakeIn = new ButtonMapping(this.ballController, ballLayout.backIntakeInBtn);
+        this.backIntakeOut = new ButtonMapping(this.ballController, ballLayout.backIntakeOutBtn);
         this.shooter = new ButtonMapping(this.ballController, ballLayout.shooterBtn);
         this.turretHor = new AxisMapping.Builder(ballController, ballLayout.turretHor).build();
         this.turretVert = new AxisMapping.Builder(ballController, ballLayout.turretVert).build();

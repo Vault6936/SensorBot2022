@@ -9,8 +9,6 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
-import edu.wpi.first.wpilibj2.command.CommandScheduler;
-import edu.wpi.first.wpilibj2.command.ParallelCommandGroup;
 import frc.robot.commands.*;
 import frc.robot.subsystems.driveSubsystem;
 import frc.robot.subsystems.turretSubsystem;
@@ -33,8 +31,12 @@ public class RobotContainer
 
     private final driveCommand driveCommand = new driveCommand(driveSubsystem, ()-> io.driveYVel.getRawValue(), ()-> io.driveXVel.getRawValue(), ()-> io.driveRot.getRawValue()); //done
     
-    private final intakeCommand intakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN); //done
-    private final intakeCommand intakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE); //done
+    private final intakeCommand frontIntakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN, IntakeSubsystem.Intakes.INTAKE_FRONT); //done
+    private final intakeCommand frontIntakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE, IntakeSubsystem.Intakes.INTAKE_FRONT); //done
+    private final intakeCommand backIntakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN, IntakeSubsystem.Intakes.INTAKE_BACK); //done
+    private final intakeCommand backIntakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE, IntakeSubsystem.Intakes.INTAKE_BACK); //done
+    private final intakeCommand frontIntakeOutCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.OUT, IntakeSubsystem.Intakes.INTAKE_FRONT); //done
+    private final intakeCommand backIntakeOutCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.OUT, IntakeSubsystem.Intakes.INTAKE_BACK); //done
     private final turretCommand turretCommand = new turretCommand(turretSubsystem, ()-> io.turretHor.getRawValue(), ()-> io.turretVert.getRawValue()); //3 and 4 are just placeholders for now
 
     private final shooterCommand beginShootingCommand = new shooterCommand(turretSubsystem, true);
@@ -61,7 +63,10 @@ public class RobotContainer
      */
     private void configureButtonBindings()
     {
-        io.intakeIn.getButton().whenPressed(intakeInCommand).whenReleased(intakeIdleCommand);
+        io.frontIntakeIn.getButton().whenPressed(frontIntakeInCommand).whenReleased(frontIntakeIdleCommand);
+        io.backIntakeIn.getButton().whenPressed(backIntakeInCommand).whenReleased(backIntakeIdleCommand);
+        io.frontIntakeOut.getButton().whenPressed(frontIntakeOutCommand).whenReleased(frontIntakeIdleCommand);
+        io.backIntakeOut.getButton().whenPressed(backIntakeOutCommand).whenReleased(backIntakeIdleCommand);
         io.shooter.getButton().whenPressed(beginShootingCommand).whenReleased(stopShootingCommand);
         // Add button to command mappings here.
         // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html

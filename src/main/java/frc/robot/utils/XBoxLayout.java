@@ -24,7 +24,7 @@ public class XBoxLayout extends GamepadLayout {
     private static final int axsRY = 3;
 
     public XBoxLayout() {
-        intakeInBtn = btnX;
-        intakeOutBtn = btnY;
+        frontIntakeInBtn = btnX;
+        frontIntakeOutBtn = btnY;
     }
 }
