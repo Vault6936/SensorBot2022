@@ -40,8 +40,9 @@ public class intakeCommand extends CommandBase
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        subsystem.intakePeriodic();
-        subsystem.vertPeriodic();
+        /*subsystem.intakePeriodic();
+        subsystem.vertPeriodic();*/
+        subsystem.periodic();
     }
     
     // Called once the command ends or is interrupted.

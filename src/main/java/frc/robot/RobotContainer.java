@@ -31,13 +31,13 @@ public class RobotContainer
 
     private final driveCommand driveCommand = new driveCommand(driveSubsystem, ()-> io.driveYVel.getRawValue(), ()-> io.driveXVel.getRawValue(), ()-> io.driveRot.getRawValue()); //done
     
-    private final intakeCommand frontIntakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN, IntakeSubsystem.Intakes.INTAKE_FRONT); //done
-    private final intakeCommand frontIntakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE, IntakeSubsystem.Intakes.INTAKE_FRONT); //done
-    private final intakeCommand backIntakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN, IntakeSubsystem.Intakes.INTAKE_BACK); //done
-    private final intakeCommand backIntakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE, IntakeSubsystem.Intakes.INTAKE_BACK); //done
-    private final intakeCommand frontIntakeOutCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.OUT, IntakeSubsystem.Intakes.INTAKE_FRONT); //done
-    private final intakeCommand backIntakeOutCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.OUT, IntakeSubsystem.Intakes.INTAKE_BACK); //done
-    private final turretCommand turretCommand = new turretCommand(turretSubsystem, ()-> io.turretHor.getRawValue(), ()-> io.turretVert.getRawValue()); //3 and 4 are just placeholders for now
+    private final intakeCommand frontIntakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN, IntakeSubsystem.Intakes.INTAKE_FRONT);
+    private final intakeCommand frontIntakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE, IntakeSubsystem.Intakes.INTAKE_FRONT);
+    private final intakeCommand backIntakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN, IntakeSubsystem.Intakes.INTAKE_BACK);
+    private final intakeCommand backIntakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE, IntakeSubsystem.Intakes.INTAKE_BACK);
+    private final intakeCommand frontIntakeOutCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.OUT, IntakeSubsystem.Intakes.INTAKE_FRONT);
+    private final intakeCommand backIntakeOutCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.OUT, IntakeSubsystem.Intakes.INTAKE_BACK);
+    private final turretCommand turretCommand = new turretCommand(turretSubsystem, ()-> io.turretHor.getRawValue(), ()-> io.turretVert.getRawValue());
 
     private final shooterCommand beginShootingCommand = new shooterCommand(turretSubsystem, true);
     private final shooterCommand stopShootingCommand = new shooterCommand(turretSubsystem, false);
