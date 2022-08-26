@@ -6,14 +6,14 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj2.command.CommandBase;
-import frc.robot.subsystems.turretSubsystem;
+import frc.robot.subsystems.TurretSubsystem;
 
 
 /** An example command that uses an example subsystem. */
 public class shooterCommand extends CommandBase
 {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
-    private final turretSubsystem subsystem;
+    private final TurretSubsystem subsystem;
     private final boolean startShooting;
 
 
@@ -22,7 +22,7 @@ public class shooterCommand extends CommandBase
      *
      * @param subsystem The subsystem used by this command.
      */
-    public shooterCommand(turretSubsystem subsystem, boolean start)
+    public shooterCommand(TurretSubsystem subsystem, boolean start)
     {
         this.subsystem = subsystem;
         this.startShooting = start;

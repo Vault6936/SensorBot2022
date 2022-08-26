@@ -34,5 +34,7 @@ public class SwitchProLayout extends GamepadLayout {
         turretHor = 2;
         turretVert = 3;
         shooterBtn = btnZL;
+        payloadUp = btnR;
+        payloadDown = btnL;
     }
 }

@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
 
-public class turretSubsystem extends SubsystemBase
+public class TurretSubsystem extends SubsystemBase
 {
     MotorController hor = new WPI_VictorSPX(Constants.CanIds.PAYLOAD_HORIZONTAL_AIM); //replace all the ids below with the correct numbers
     MotorController vert = new CANSparkMax(Constants.CanIds.PAYLOAD_VERTICAL_AIM, CANSparkMaxLowLevel.MotorType.kBrushed);
@@ -21,7 +21,7 @@ public class turretSubsystem extends SubsystemBase
     MotorController shooter_back = new CANSparkMax(Constants.CanIds.LAUNCHER_WHEEL_BACK, CANSparkMaxLowLevel.MotorType.kBrushless);
 
     /** Creates a new subsystem. */
-    public turretSubsystem() {}
+    public TurretSubsystem() {}
     
     
     @Override

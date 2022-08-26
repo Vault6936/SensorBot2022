@@ -26,7 +26,8 @@ public class IO {
     ButtonMapping backIntakeOut;
 
     ButtonMapping shooter;
-
+    ButtonMapping payloadUp;
+    ButtonMapping payloadDown;
     AxisMapping turretHor;
     AxisMapping turretVert;
     private IO() {
@@ -42,6 +43,8 @@ public class IO {
         this.backIntakeIn = new ButtonMapping(this.ballController, ballLayout.backIntakeInBtn);
         this.backIntakeOut = new ButtonMapping(this.ballController, ballLayout.backIntakeOutBtn);
         this.shooter = new ButtonMapping(this.ballController, ballLayout.shooterBtn);
+        this.payloadUp = new ButtonMapping(this.ballController, ballLayout.payloadUp);
+        this.payloadDown = new ButtonMapping(this.ballController, ballLayout.payloadDown);
         this.turretHor = new AxisMapping.Builder(ballController, ballLayout.turretHor).build();
         this.turretVert = new AxisMapping.Builder(ballController, ballLayout.turretVert).build();
     }

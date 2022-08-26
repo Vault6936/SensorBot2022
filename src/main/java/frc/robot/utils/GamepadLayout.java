@@ -12,4 +12,6 @@ public abstract class GamepadLayout {
     public int turretHor;
     public int turretVert;
     public int shooterBtn;
+    public int payloadUp;
+    public int payloadDown;
 }
