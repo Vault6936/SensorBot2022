@@ -46,7 +46,6 @@ public class intakeReleaseCommand extends CommandBase
     @Override
     public void execute() {
         subsystem.intakePeriodic();
-        subsystem.vertPeriodic();
     }
     
     // Called once the command ends or is interrupted.

@@ -12,7 +12,6 @@ import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
 
-
 public class TurretSubsystem extends SubsystemBase
 {
     MotorController hor = new WPI_VictorSPX(Constants.CanIds.PAYLOAD_HORIZONTAL_AIM); //replace all the ids below with the correct numbers
