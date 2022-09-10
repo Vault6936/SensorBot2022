@@ -43,5 +43,6 @@ public final class Constants {
         public static int PAYLOAD_VERTICAL_AIM = 24;
         public static int LAUNCHER_WHEEL_FRONT = 22;
         public static int LAUNCHER_WHEEL_BACK = 23;
+        public static int INTAKE_PULLEY = 0;
     }
 }

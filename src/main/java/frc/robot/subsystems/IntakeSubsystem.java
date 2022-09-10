@@ -8,10 +8,10 @@ package frc.robot.subsystems;
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
 import com.revrobotics.CANSparkMax;
 import com.revrobotics.CANSparkMaxLowLevel;
-import edu.wpi.first.wpilibj.Servo;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
+import edu.wpi.first.wpilibj.Timer;
 
 
 public class IntakeSubsystem extends SubsystemBase
@@ -25,10 +25,32 @@ public class IntakeSubsystem extends SubsystemBase
         INTAKE_FRONT,
         INTAKE_BACK
     }
+    private static class IntakeReleaseData {
+        private double speed = 0;
+        private double timeToRun = 0;
+        private boolean isRunning = false;
+        private Timer timer = new Timer();
+        public IntakeReleaseData() {
+            timer.reset();
+        }
+        private void begin(double time) {
+            timer.reset();
+            timeToRun = time;
+            isRunning = true;
+        }
+        private void update() {
+            if(timer.get() >= timeToRun) {
+                speed = 0;
+                timeToRun = 0;
+                isRunning = false;
+            }
+        }
+    }
+    IntakeReleaseData intakeData = new IntakeReleaseData();
     MotorController intake1 = new CANSparkMax(Constants.CanIds.INTAKE_FRONT, CANSparkMaxLowLevel.MotorType.kBrushless);
     MotorController intake2 = new WPI_VictorSPX(Constants.CanIds.INTAKE_BACK);
 
-    Servo setup = new Servo(3);
+    MotorController setup = new WPI_VictorSPX(Constants.CanIds.INTAKE_PULLEY);
 
     private State state = State.IDLE;
 
@@ -58,12 +80,10 @@ public class IntakeSubsystem extends SubsystemBase
                 break;
         }
     }
-    public void releaseIntake() {
-        setup.setAngle(Constants.servoAngle);
+    public void setIntakeRelease() {
+        setup.set(intakeData.speed);
     }
-    public void storeIntake() {
-        setup.setAngle(0);
-    }
+
 }
 
 
