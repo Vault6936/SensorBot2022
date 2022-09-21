@@ -36,5 +36,7 @@ public class SwitchProLayout extends GamepadLayout {
         shooterBtn = btnZL;
         payloadUp = btnR;
         payloadDown = btnL;
+        armUp = btnPLUS;
+        armDown = btnMINUS;
     }
 }

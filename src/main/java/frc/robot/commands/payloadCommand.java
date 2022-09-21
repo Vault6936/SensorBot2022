@@ -26,7 +26,6 @@ public class payloadCommand extends CommandBase
     {
         this.subsystem = subsystem;
         this.state = state;
-        subsystem.setState(state);
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
     }
@@ -37,8 +36,9 @@ public class payloadCommand extends CommandBase
     
     // Called every time the scheduler runs while the command is scheduled.
     @Override
-    public void execute() {
-        subsystem.periodic();
+    public void execute()
+    {
+        subsystem.setState(state);
     }
     
     // Called once the command ends or is interrupted.

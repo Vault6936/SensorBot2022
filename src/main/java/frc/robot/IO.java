@@ -28,6 +28,8 @@ public class IO {
     ButtonMapping shooter;
     ButtonMapping payloadUp;
     ButtonMapping payloadDown;
+    ButtonMapping armUp;
+    ButtonMapping armDown;
     AxisMapping turretHor;
     AxisMapping turretVert;
     private IO() {
@@ -47,6 +49,8 @@ public class IO {
         this.payloadDown = new ButtonMapping(this.ballController, ballLayout.payloadDown);
         this.turretHor = new AxisMapping.Builder(ballController, ballLayout.turretHor).build();
         this.turretVert = new AxisMapping.Builder(ballController, ballLayout.turretVert).build();
+        this.armUp = new ButtonMapping(ballController, ballLayout.armUp);
+        this.armDown = new ButtonMapping(ballController, ballLayout.armDown);
     }
     public static IO getInstance() {
         if (instance == null) {

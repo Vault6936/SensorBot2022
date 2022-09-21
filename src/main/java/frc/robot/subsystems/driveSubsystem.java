@@ -27,7 +27,7 @@ public class driveSubsystem extends SubsystemBase
     double lastXVel = 0;
 
     double lastRot = 0;
-    double maxVelAccel = 0.01;
+    double maxVelAccel = 0.04;
 
     double maxRotAccel = 0.01;
     /** Creates a new subsystem. */
@@ -47,12 +47,15 @@ public class driveSubsystem extends SubsystemBase
 
     public void drivePeriodic(double yVel, double xVel, double rot)
     {
-        yVel *= 0.6;
+        yVel *= -0.6;
         xVel *= 0.6;
         rot *= 0.6;
         yVel = MathUtil.clamp(yVel, this.lastYVel - this.maxVelAccel, this.lastYVel + this.maxVelAccel);
         xVel = MathUtil.clamp(xVel, this.lastXVel - this.maxVelAccel, this.lastXVel + this.maxVelAccel);
         rot = MathUtil.clamp(rot, this.lastRot - this.maxRotAccel, this.lastRot + this.maxRotAccel);
+        yVel = MathUtil.clamp(yVel, -1. * Constants.maxSpeed, Constants.maxSpeed);
+        xVel = MathUtil.clamp(xVel, -1. * Constants.maxSpeed, Constants.maxSpeed);
+        rot = MathUtil.clamp(rot, -1. * Constants.maxRotation, Constants.maxRotation);
         base.driveCartesian(yVel, xVel, rot);
         this.lastYVel = yVel;
         this.lastXVel = xVel;

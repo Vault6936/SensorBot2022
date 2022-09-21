@@ -34,10 +34,6 @@ public class PayloadSubsystem extends SubsystemBase
     public void periodic()
     {
         // This method will be called once per scheduler run
-    }
-
-    public void payloadPeriodic()
-    {
         switch (state) {
             case UP:
                 up.set(0.5);
@@ -49,5 +45,9 @@ public class PayloadSubsystem extends SubsystemBase
                 up.set(0);
                 break;
         }
+    }
+
+    public void payloadPeriodic()
+    {
     }
 }

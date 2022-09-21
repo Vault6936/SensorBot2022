@@ -57,8 +57,8 @@ public class IntakeSubsystem extends SubsystemBase
     private Intakes intakeMotor = Intakes.INTAKE_FRONT;
 
     private MotorController intakeMotorArray[] = {intake1, intake2};
-    private final double inSpeed = -0.45;
-    private final double outSpeed = 0.45;
+    private final double inSpeed = -0.35;
+    private final double outSpeed = 0.35;
 
     public IntakeSubsystem() {}
     

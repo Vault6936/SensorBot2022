@@ -10,10 +10,7 @@ import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.commands.*;
-import frc.robot.subsystems.PayloadSubsystem;
-import frc.robot.subsystems.driveSubsystem;
-import frc.robot.subsystems.TurretSubsystem;
-import frc.robot.subsystems.IntakeSubsystem;
+import frc.robot.subsystems.*;
 
 /**
  * This class is where the bulk of the robot should be declared. Since Command-based is a
@@ -30,9 +27,12 @@ public class RobotContainer
     private final TurretSubsystem turretSubsystem = new TurretSubsystem();
     private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
     private final PayloadSubsystem payloadSubsystem = new PayloadSubsystem();
+    private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
 
     private final driveCommand driveCommand = new driveCommand(driveSubsystem, ()-> io.driveYVel.getRawValue(), ()-> io.driveXVel.getRawValue(), ()-> io.driveRot.getRawValue()); //done
-    
+
+    private final ArmsCommand armUpCommand = new ArmsCommand(armsSubsystem, ArmsSubsystem.ArmsState.UP);
+    private final ArmsCommand armDownCommand = new ArmsCommand(armsSubsystem, ArmsSubsystem.ArmsState.DOWN);
     private final intakeCommand frontIntakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN, IntakeSubsystem.Intakes.INTAKE_FRONT);
     private final intakeCommand frontIntakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE, IntakeSubsystem.Intakes.INTAKE_FRONT);
     private final intakeCommand backIntakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN, IntakeSubsystem.Intakes.INTAKE_BACK);
@@ -75,6 +75,8 @@ public class RobotContainer
         io.shooter.getButton().whenPressed(beginShootingCommand).whenReleased(stopShootingCommand);
         io.payloadUp.getButton().whenPressed(payloadUpCommand).whenReleased(payloadIdleCommand);
         io.payloadDown.getButton().whenPressed(payloadDownCommand).whenReleased(payloadIdleCommand);
+        io.armUp.getButton().whenPressed(armUpCommand).whenReleased(armUpCommand::cancel);
+        io.armDown.getButton().whenPressed(armDownCommand).whenReleased(armDownCommand::cancel);
         // Add button to command mappings here.
         // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html
     }

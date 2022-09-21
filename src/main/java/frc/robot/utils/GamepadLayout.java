@@ -14,4 +14,6 @@ public abstract class GamepadLayout {
     public int shooterBtn;
     public int payloadUp;
     public int payloadDown;
+    public int armUp;
+    public int armDown;
 }

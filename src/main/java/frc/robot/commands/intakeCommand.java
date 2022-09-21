@@ -27,8 +27,6 @@ public class intakeCommand extends CommandBase
         this.subsystem = subsystem;
         this.state = state;
         this.intakeMotor = intakeMotor;
-        subsystem.setState(state);
-        subsystem.setIntakeMotor(intakeMotor);
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
     }
@@ -40,6 +38,8 @@ public class intakeCommand extends CommandBase
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
+        subsystem.setState(state);
+        subsystem.setIntakeMotor(intakeMotor);
         subsystem.intakePeriodic();
     }
     
