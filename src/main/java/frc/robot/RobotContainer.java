@@ -24,28 +24,10 @@ public class RobotContainer
     public static IO io = IO.getInstance();
 
     private final driveSubsystem driveSubsystem = new driveSubsystem();
-    private final TurretSubsystem turretSubsystem = new TurretSubsystem();
-    private final IntakeSubsystem intakeSubsystem = new IntakeSubsystem();
-    private final PayloadSubsystem payloadSubsystem = new PayloadSubsystem();
-    private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
 
-    private final driveCommand driveCommand = new driveCommand(driveSubsystem, ()-> io.driveYVel.getRawValue(), ()-> io.driveXVel.getRawValue(), ()-> io.driveRot.getRawValue()); //done
+    private final driveCommand driveCommand = new driveCommand(driveSubsystem, io.driveYVel::getRawValue, io.driveXVel::getRawValue, io.driveRot::getRawValue); //done
 
-    private final ArmsCommand armUpCommand = new ArmsCommand(armsSubsystem, ArmsSubsystem.ArmsState.UP);
-    private final ArmsCommand armDownCommand = new ArmsCommand(armsSubsystem, ArmsSubsystem.ArmsState.DOWN);
-    private final intakeCommand frontIntakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN, IntakeSubsystem.Intakes.INTAKE_FRONT);
-    private final intakeCommand frontIntakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE, IntakeSubsystem.Intakes.INTAKE_FRONT);
-    private final intakeCommand backIntakeInCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IN, IntakeSubsystem.Intakes.INTAKE_BACK);
-    private final intakeCommand backIntakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE, IntakeSubsystem.Intakes.INTAKE_BACK);
-    private final intakeCommand frontIntakeOutCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.OUT, IntakeSubsystem.Intakes.INTAKE_FRONT);
-    private final intakeCommand backIntakeOutCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.OUT, IntakeSubsystem.Intakes.INTAKE_BACK);
-    private final payloadCommand payloadUpCommand = new payloadCommand(payloadSubsystem, PayloadSubsystem.State.UP);
-    private final payloadCommand payloadDownCommand = new payloadCommand(payloadSubsystem, PayloadSubsystem.State.DOWN);
-    private final payloadCommand payloadIdleCommand = new payloadCommand(payloadSubsystem, PayloadSubsystem.State.IDLE);
-    private final turretCommand turretCommand = new turretCommand(turretSubsystem, ()-> io.turretHor.getRawValue(), ()-> io.turretVert.getRawValue());
 
-    private final shooterCommand beginShootingCommand = new shooterCommand(turretSubsystem, true);
-    private final shooterCommand stopShootingCommand = new shooterCommand(turretSubsystem, false);
 
     //private final Command autoCommand = new ParallelCommandGroup(driveCommand);
     /** The container for the robot. Contains subsystems, OI devices, and commands. */
@@ -56,7 +38,6 @@ public class RobotContainer
         SmartDashboard.putString("booted", "Robot booted successfully.");
         configureButtonBindings();
         Constants.commandScheduler.setDefaultCommand(driveSubsystem, driveCommand);
-        Constants.commandScheduler.setDefaultCommand(turretSubsystem, turretCommand);
     }
     
     
@@ -68,17 +49,7 @@ public class RobotContainer
      */
     private void configureButtonBindings()
     {
-        io.frontIntakeIn.getButton().whenPressed(frontIntakeInCommand).whenReleased(frontIntakeIdleCommand);
-        io.backIntakeIn.getButton().whenPressed(backIntakeInCommand).whenReleased(backIntakeIdleCommand);
-        io.frontIntakeOut.getButton().whenPressed(frontIntakeOutCommand).whenReleased(frontIntakeIdleCommand);
-        io.backIntakeOut.getButton().whenPressed(backIntakeOutCommand).whenReleased(backIntakeIdleCommand);
-        io.shooter.getButton().whenPressed(beginShootingCommand).whenReleased(stopShootingCommand);
-        io.payloadUp.getButton().whenPressed(payloadUpCommand).whenReleased(payloadIdleCommand);
-        io.payloadDown.getButton().whenPressed(payloadDownCommand).whenReleased(payloadIdleCommand);
-        io.armUp.getButton().whenPressed(armUpCommand).whenReleased(armUpCommand::cancel);
-        io.armDown.getButton().whenPressed(armDownCommand).whenReleased(armDownCommand::cancel);
-        // Add button to command mappings here.
-        // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html
+
     }
     
     
