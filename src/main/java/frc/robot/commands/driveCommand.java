@@ -18,19 +18,17 @@ public class driveCommand extends CommandBase
     private final driveSubsystem subsystem;
     private final DoubleSupplier xVel;
     private final DoubleSupplier yVel;
-    private final DoubleSupplier rot;
     
     /**
      * Creates a new ExampleCommand.
      *
      * @param subsystem The subsystem used by this command.
      */
-    public driveCommand(driveSubsystem subsystem, DoubleSupplier yVel, DoubleSupplier xVel, DoubleSupplier rot)
+    public driveCommand(driveSubsystem subsystem, DoubleSupplier yVel, DoubleSupplier xVel)
     {
         this.subsystem = subsystem;
         this.yVel = yVel;
         this.xVel = xVel;
-        this.rot = rot;
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
     }
@@ -44,7 +42,7 @@ public class driveCommand extends CommandBase
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        subsystem.drivePeriodic(yVel.getAsDouble(), xVel.getAsDouble(), rot.getAsDouble());
+        subsystem.drivePeriodic(yVel.getAsDouble(), xVel.getAsDouble());
     }
     
     

@@ -25,7 +25,7 @@ public class RobotContainer
 
     private final driveSubsystem driveSubsystem = new driveSubsystem();
 
-    private final driveCommand driveCommand = new driveCommand(driveSubsystem, io.driveYVel::getRawValue, io.driveXVel::getRawValue, io.driveRot::getRawValue); //done
+    private final driveCommand driveCommand = new driveCommand(driveSubsystem, io.driveYVel::getRawValue, io.driveXVel::getRawValue); //done
 
 
 
@@ -60,7 +60,6 @@ public class RobotContainer
      */
     public Command getAutonomousCommand()
     {
-        // An ExampleCommand will run in autonomous
-        return driveCommand;
+        return null;
     }
 }
