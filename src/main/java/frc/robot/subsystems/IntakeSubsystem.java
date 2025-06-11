@@ -6,8 +6,7 @@
 package frc.robot.subsystems;
 
 import com.ctre.phoenix.motorcontrol.can.WPI_VictorSPX;
-import com.revrobotics.CANSparkMax;
-import com.revrobotics.CANSparkMaxLowLevel;
+import com.revrobotics.spark.SparkMax;
 import edu.wpi.first.wpilibj.motorcontrol.MotorController;
 import edu.wpi.first.wpilibj2.command.SubsystemBase;
 import frc.robot.Constants;
@@ -47,7 +46,7 @@ public class IntakeSubsystem extends SubsystemBase
         }
     }
     IntakeReleaseData intakeData = new IntakeReleaseData();
-    MotorController intake1 = new CANSparkMax(Constants.CanIds.INTAKE_FRONT, CANSparkMaxLowLevel.MotorType.kBrushless);
+    MotorController intake1 = new SparkMax(Constants.CanIds.INTAKE_FRONT, SparkMax.MotorType.kBrushless);
     MotorController intake2 = new WPI_VictorSPX(Constants.CanIds.INTAKE_BACK);
 
     MotorController setup = new WPI_VictorSPX(Constants.CanIds.INTAKE_PULLEY);

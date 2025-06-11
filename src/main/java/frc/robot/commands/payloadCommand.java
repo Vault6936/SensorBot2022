@@ -5,13 +5,13 @@
 
 package frc.robot.commands;
 
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.IntakeSubsystem;
 import frc.robot.subsystems.PayloadSubsystem;
 
 
 /** An example command that uses an example subsystem. */
-public class payloadCommand extends CommandBase
+public class payloadCommand extends Command
 {
     @SuppressWarnings({"PMD.UnusedPrivateField", "PMD.SingularField"})
     private final PayloadSubsystem subsystem;

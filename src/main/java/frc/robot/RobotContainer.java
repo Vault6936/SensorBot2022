@@ -9,6 +9,7 @@ import edu.wpi.first.wpilibj.GenericHID;
 import edu.wpi.first.wpilibj.XboxController;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import edu.wpi.first.wpilibj2.command.InstantCommand;
 import frc.robot.commands.*;
 import frc.robot.subsystems.*;
 
@@ -68,17 +69,17 @@ public class RobotContainer
      */
     private void configureButtonBindings()
     {
-        io.frontIntakeIn.getButton().whenPressed(frontIntakeInCommand).whenReleased(frontIntakeIdleCommand);
-        io.backIntakeIn.getButton().whenPressed(backIntakeInCommand).whenReleased(backIntakeIdleCommand);
-        io.frontIntakeOut.getButton().whenPressed(frontIntakeOutCommand).whenReleased(frontIntakeIdleCommand);
-        io.backIntakeOut.getButton().whenPressed(backIntakeOutCommand).whenReleased(backIntakeIdleCommand);
-        io.shooter.getButton().whenPressed(beginShootingCommand).whenReleased(stopShootingCommand);
-        io.payloadUp.getButton().whenPressed(payloadUpCommand).whenReleased(payloadIdleCommand);
-        io.payloadDown.getButton().whenPressed(payloadDownCommand).whenReleased(payloadIdleCommand);
-        io.armUp.getButton().whenPressed(armUpCommand).whenReleased(armUpCommand::cancel);
-        io.armDown.getButton().whenPressed(armDownCommand).whenReleased(armDownCommand::cancel);
+        io.frontIntakeIn.getButton().whileTrue(frontIntakeInCommand).onFalse(frontIntakeIdleCommand);
+        io.backIntakeIn.getButton().whileTrue(backIntakeInCommand).onFalse(backIntakeIdleCommand);
+        io.frontIntakeOut.getButton().whileTrue(frontIntakeOutCommand).onFalse(frontIntakeIdleCommand);
+        io.backIntakeOut.getButton().whileTrue(backIntakeOutCommand).onFalse(backIntakeIdleCommand);
+        io.shooter.getButton().whileTrue(beginShootingCommand).onFalse(stopShootingCommand);
+        io.payloadUp.getButton().whileTrue(payloadUpCommand).onFalse(payloadIdleCommand);
+        io.payloadDown.getButton().whileTrue(payloadDownCommand).onFalse(payloadIdleCommand);
+        io.armUp.getButton().whileTrue(armUpCommand).onFalse(new InstantCommand(armUpCommand::cancel));
+        io.armDown.getButton().whileTrue(armDownCommand).onFalse(new InstantCommand(armDownCommand::cancel));
         // Add button to command mappings here.
-        // See https://docs.wpilib.org/en/stable/docs/software/commandbased/binding-commands-to-triggers.html
+        // See https://docs.wpilib.org/en/stable/docs/software/Commandd/binding-commands-to-triggers.html
     }
     
     

@@ -1,10 +1,10 @@
 package frc.robot.commands;
 
 import edu.wpi.first.wpilibj.Timer;
-import edu.wpi.first.wpilibj2.command.CommandBase;
+import edu.wpi.first.wpilibj2.command.Command;
 import frc.robot.subsystems.ArmsSubsystem;
 
-public class ArmsCommand extends CommandBase
+public class ArmsCommand extends Command
 {
     private final ArmsSubsystem subsystem;
     private final ArmsSubsystem.ArmsState state;
