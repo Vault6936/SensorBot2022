@@ -33,7 +33,7 @@ public class driveSubsystem extends SubsystemBase
     /** Creates a new subsystem. */
     public driveSubsystem() {
         frM.setInverted(true);
-        brM.setInverted(true);
+        flM.setInverted(true);
         base = new MecanumDrive(flM, blM, frM, brM);
 
     }

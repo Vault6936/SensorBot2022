@@ -30,7 +30,10 @@ public class RobotContainer
     private final PayloadSubsystem payloadSubsystem = new PayloadSubsystem();
     private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
 
-    private final driveCommand driveCommand = new driveCommand(driveSubsystem, ()-> io.driveYVel.getRawValue(), ()-> io.driveXVel.getRawValue(), ()-> io.driveRot.getRawValue()); //done
+    private final driveCommand driveCommand = new driveCommand(driveSubsystem,
+            ()-> io.driveYVel.getRawValue() + io.driveYVelJoystick.getRawValue(),
+            ()-> io.driveXVel.getRawValue() + io.driveXVelJoystick.getRawValue(),
+            ()-> io.driveRot.getRawValue() + io.driveRotJoystick.getRawValue()); //done
 
     private final ArmsCommand armUpCommand = new ArmsCommand(armsSubsystem, ArmsSubsystem.ArmsState.UP);
     private final ArmsCommand armDownCommand = new ArmsCommand(armsSubsystem, ArmsSubsystem.ArmsState.DOWN);
@@ -43,7 +46,7 @@ public class RobotContainer
     private final payloadCommand payloadUpCommand = new payloadCommand(payloadSubsystem, PayloadSubsystem.State.UP);
     private final payloadCommand payloadDownCommand = new payloadCommand(payloadSubsystem, PayloadSubsystem.State.DOWN);
     private final payloadCommand payloadIdleCommand = new payloadCommand(payloadSubsystem, PayloadSubsystem.State.IDLE);
-    private final turretCommand turretCommand = new turretCommand(turretSubsystem, ()-> io.turretHor.getRawValue(), ()-> io.turretVert.getRawValue());
+    private final turretCommand turretCommand = new turretCommand(turretSubsystem, io.turretHor, io.turretVert);
 
     private final shooterCommand beginShootingCommand = new shooterCommand(turretSubsystem, true);
     private final shooterCommand stopShootingCommand = new shooterCommand(turretSubsystem, false);
@@ -78,6 +81,16 @@ public class RobotContainer
         io.payloadDown.getButton().whileTrue(payloadDownCommand).onFalse(payloadIdleCommand);
         io.armUp.getButton().whileTrue(armUpCommand).onFalse(new InstantCommand(armUpCommand::cancel));
         io.armDown.getButton().whileTrue(armDownCommand).onFalse(new InstantCommand(armDownCommand::cancel));
+
+        io.frontIntakeInJoystick.getButton().whileTrue(frontIntakeInCommand).onFalse(frontIntakeIdleCommand);
+        io.frontIntakeInJoystick.getButton().whileTrue(backIntakeInCommand).onFalse(backIntakeIdleCommand);
+        io.frontIntakeOutJoystick.getButton().whileTrue(frontIntakeOutCommand).onFalse(frontIntakeIdleCommand);
+        io.frontIntakeOutJoystick.getButton().whileTrue(backIntakeOutCommand).onFalse(backIntakeIdleCommand);
+        io.shooterJoystick.getButton().whileTrue(beginShootingCommand).onFalse(stopShootingCommand);
+        io.payloadUpJoystick.getButton().whileTrue(payloadUpCommand).onFalse(payloadIdleCommand);
+        io.payloadDownJoystick.getButton().whileTrue(payloadDownCommand).onFalse(payloadIdleCommand);
+        io.armUpJoystick.getButton().whileTrue(armUpCommand).onFalse(new InstantCommand(armUpCommand::cancel));
+        io.armDownJoystick.getButton().whileTrue(armDownCommand).onFalse(new InstantCommand(armDownCommand::cancel));
         // Add button to command mappings here.
         // See https://docs.wpilib.org/en/stable/docs/software/Commandd/binding-commands-to-triggers.html
     }

@@ -19,7 +19,9 @@ public class TurretSubsystem extends SubsystemBase
     MotorController shooter_back = new SparkMax(Constants.CanIds.LAUNCHER_WHEEL_BACK, SparkMax.MotorType.kBrushless);
 
     /** Creates a new subsystem. */
-    public TurretSubsystem() {}
+    public TurretSubsystem() {
+        shooter_front.setInverted(false);
+    }
     
     
     @Override
@@ -30,8 +32,6 @@ public class TurretSubsystem extends SubsystemBase
 
     public void turretPeriodic(double horVel, double vertVel)
     {
-        horVel *= 0.6;
-        vertVel *= 0.6;
         hor.set(horVel);
         vert.set(vertVel);
     }

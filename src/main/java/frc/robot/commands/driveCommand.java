@@ -19,7 +19,7 @@ public class driveCommand extends Command
     private final DoubleSupplier xVel;
     private final DoubleSupplier yVel;
     private final DoubleSupplier rot;
-    
+
     /**
      * Creates a new ExampleCommand.
      *
@@ -31,6 +31,7 @@ public class driveCommand extends Command
         this.yVel = yVel;
         this.xVel = xVel;
         this.rot = rot;
+
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
     }

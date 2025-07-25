@@ -22,7 +22,8 @@ public class IntakeSubsystem extends SubsystemBase
     }
     public enum Intakes {
         INTAKE_FRONT,
-        INTAKE_BACK
+        INTAKE_BACK,
+        BOTH
     }
     private static class IntakeReleaseData {
         private double speed = 0;
@@ -45,44 +46,45 @@ public class IntakeSubsystem extends SubsystemBase
             }
         }
     }
-    IntakeReleaseData intakeData = new IntakeReleaseData();
-    MotorController intake1 = new SparkMax(Constants.CanIds.INTAKE_FRONT, SparkMax.MotorType.kBrushless);
-    MotorController intake2 = new WPI_VictorSPX(Constants.CanIds.INTAKE_BACK);
 
-    MotorController setup = new WPI_VictorSPX(Constants.CanIds.INTAKE_PULLEY);
+    MotorController intake1 = new WPI_VictorSPX(Constants.CanIds.INTAKE_FRONT);
+    MotorController intake2 = new WPI_VictorSPX(Constants.CanIds.INTAKE_BACK);
 
     private State state = State.IDLE;
 
     private Intakes intakeMotor = Intakes.INTAKE_FRONT;
 
     private MotorController intakeMotorArray[] = {intake1, intake2};
-    private final double inSpeed = -0.35;
-    private final double outSpeed = 0.35;
+    private final double outSpeed = -0.35;
+    private final double inSpeed = 0.35;
 
     public IntakeSubsystem() {}
     
     public void setState(State state) {
         this.state = state;
     }
-    public void setIntakeMotor(Intakes intakeMotor) {this.intakeMotor = intakeMotor;}
+    public void setIntakeMotor(Intakes intakeMotor) {
+        this.intakeMotor = intakeMotor;
+    }
 
     public void intakePeriodic() {
+        // TODO : allow support for both motors.
         switch (state) {
             case IN:
-                intakeMotorArray[intakeMotor.ordinal()].set(inSpeed);
+                if(intakeMotor == Intakes.BOTH) {
+                    intakeMotorArray[0].set(outSpeed);
+                    intakeMotorArray[1].set(outSpeed);
+                }
+                else {
+                    intakeMotorArray[intakeMotor.ordinal()].set(outSpeed);
+                }
                 break;
             case OUT:
-                intakeMotorArray[intakeMotor.ordinal()].set(outSpeed);
+                intakeMotorArray[intakeMotor.ordinal()].set(inSpeed);
                 break;
             case IDLE:
                 intakeMotorArray[intakeMotor.ordinal()].set(0);
                 break;
         }
     }
-    public void setIntakeRelease() {
-        setup.set(intakeData.speed);
-    }
-
 }
-
-

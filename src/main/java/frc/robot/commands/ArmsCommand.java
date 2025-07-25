@@ -20,7 +20,7 @@ public class ArmsCommand extends Command
     public void initialize()
     {
         subsystem.setState(state);
-        startTime = Timer.getFPGATimestamp();
+        startTime = Timer.getTimestamp();
     }
 
     @Override
@@ -32,7 +32,7 @@ public class ArmsCommand extends Command
     @Override
     public boolean isFinished()
     {
-        if(Timer.getFPGATimestamp() - startTime > 0.75)
+        if(Timer.getTimestamp() - startTime > 2.5)
         {
             subsystem.setState(ArmsSubsystem.ArmsState.STOP);
             return true;
