@@ -30,6 +30,7 @@ public final class Constants {
     public static int PAYLOAD_CONTROLLER = 1;
     public static int JOYSTICK_CONTROLLER = 2;
 
+    public static boolean FieldCentric = true;
 
     public static class CanIds
     {

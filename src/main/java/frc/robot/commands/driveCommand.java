@@ -5,7 +5,13 @@
 
 package frc.robot.commands;
 
+
+
+import com.kauailabs.navx.frc.AHRS;
+import edu.wpi.first.wpilibj.SPI;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj2.command.Command;
+import frc.robot.Constants;
 import frc.robot.subsystems.driveSubsystem;
 
 import java.util.function.DoubleSupplier;
@@ -20,6 +26,10 @@ public class driveCommand extends Command
     private final DoubleSupplier yVel;
     private final DoubleSupplier rot;
 
+    AHRS ahrs;
+
+
+
     /**
      * Creates a new ExampleCommand.
      *
@@ -32,6 +42,8 @@ public class driveCommand extends Command
         this.xVel = xVel;
         this.rot = rot;
 
+        ahrs = new AHRS(SPI.Port.kMXP);
+
         // Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
     }
@@ -39,13 +51,16 @@ public class driveCommand extends Command
     
     // Called when the command is initially scheduled.
     @Override
-    public void initialize() {}
+    public void initialize() {
+        ahrs.reset();
+    }
     
     
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        subsystem.drivePeriodic(yVel.getAsDouble(), xVel.getAsDouble(), rot.getAsDouble());
+        double robotAngleRadians = ahrs.getYaw() * Math.PI/180;
+        subsystem.drivePeriodic(yVel.getAsDouble(), xVel.getAsDouble(), rot.getAsDouble(), robotAngleRadians, Constants.FieldCentric);
     }
     
     

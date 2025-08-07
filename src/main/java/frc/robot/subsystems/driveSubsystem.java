@@ -45,17 +45,31 @@ public class driveSubsystem extends SubsystemBase
         // This method will be called once per scheduler run
     }
 
-    public void drivePeriodic(double yVel, double xVel, double rot)
+    public void drivePeriodic(double yVel, double xVel, double rot, double robotAngle, boolean isFieldCentric)
     {
+
+
+
         yVel *= -0.6;
         xVel *= 0.6;
         rot *= 0.6;
+
+        if(isFieldCentric) {
+            double temp = yVel * Math.cos(robotAngle) + xVel * Math.sin(robotAngle);
+            xVel = -yVel * Math.sin(robotAngle) + xVel * Math.cos(robotAngle);
+            yVel = temp;
+        }
+
         yVel = MathUtil.clamp(yVel, this.lastYVel - this.maxVelAccel, this.lastYVel + this.maxVelAccel);
         xVel = MathUtil.clamp(xVel, this.lastXVel - this.maxVelAccel, this.lastXVel + this.maxVelAccel);
         rot = MathUtil.clamp(rot, this.lastRot - this.maxRotAccel, this.lastRot + this.maxRotAccel);
         yVel = MathUtil.clamp(yVel, -1. * Constants.maxSpeed, Constants.maxSpeed);
         xVel = MathUtil.clamp(xVel, -1. * Constants.maxSpeed, Constants.maxSpeed);
         rot = MathUtil.clamp(rot, -1. * Constants.maxRotation, Constants.maxRotation);
+
+
+
+
         base.driveCartesian(yVel, xVel, rot);
         this.lastYVel = yVel;
         this.lastXVel = xVel;

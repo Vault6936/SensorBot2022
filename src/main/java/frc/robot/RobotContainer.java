@@ -31,8 +31,8 @@ public class RobotContainer
     private final ArmsSubsystem armsSubsystem = new ArmsSubsystem();
 
     private final driveCommand driveCommand = new driveCommand(driveSubsystem,
-            ()-> io.driveYVel.getRawValue() + io.driveYVelJoystick.getRawValue(),
-            ()-> io.driveXVel.getRawValue() + io.driveXVelJoystick.getRawValue(),
+            ()-> io.driveYVel.getRawValue() + io.driveXVelJoystick.getRawValue(),
+            ()-> io.driveXVel.getRawValue() + io.driveYVelJoystick.getRawValue(),
             ()-> io.driveRot.getRawValue() + io.driveRotJoystick.getRawValue()); //done
 
     private final ArmsCommand armUpCommand = new ArmsCommand(armsSubsystem, ArmsSubsystem.ArmsState.UP);
@@ -43,6 +43,8 @@ public class RobotContainer
     private final intakeCommand backIntakeIdleCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.IDLE, IntakeSubsystem.Intakes.INTAKE_BACK);
     private final intakeCommand frontIntakeOutCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.OUT, IntakeSubsystem.Intakes.INTAKE_FRONT);
     private final intakeCommand backIntakeOutCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.OUT, IntakeSubsystem.Intakes.INTAKE_BACK);
+    private final intakeCommand bothIntakeInCommand = new intakeCommand(intakeSubsystem,IntakeSubsystem.State.IN, IntakeSubsystem.Intakes.BOTH);
+    private final intakeCommand bothIntakeOutCommand = new intakeCommand(intakeSubsystem, IntakeSubsystem.State.OUT,IntakeSubsystem.Intakes.BOTH);
     private final payloadCommand payloadUpCommand = new payloadCommand(payloadSubsystem, PayloadSubsystem.State.UP);
     private final payloadCommand payloadDownCommand = new payloadCommand(payloadSubsystem, PayloadSubsystem.State.DOWN);
     private final payloadCommand payloadIdleCommand = new payloadCommand(payloadSubsystem, PayloadSubsystem.State.IDLE);
@@ -72,20 +74,18 @@ public class RobotContainer
      */
     private void configureButtonBindings()
     {
-        io.frontIntakeIn.getButton().whileTrue(frontIntakeInCommand).onFalse(frontIntakeIdleCommand);
-        io.backIntakeIn.getButton().whileTrue(backIntakeInCommand).onFalse(backIntakeIdleCommand);
-        io.frontIntakeOut.getButton().whileTrue(frontIntakeOutCommand).onFalse(frontIntakeIdleCommand);
-        io.backIntakeOut.getButton().whileTrue(backIntakeOutCommand).onFalse(backIntakeIdleCommand);
+        io.frontIntakeIn.getButton().whileTrue(bothIntakeInCommand).onFalse(frontIntakeIdleCommand);
+        io.backIntakeIn.getButton().whileTrue(bothIntakeOutCommand).onFalse(backIntakeIdleCommand);
+        io.frontIntakeOut.getButton().whileTrue(bothIntakeOutCommand).onFalse(frontIntakeIdleCommand);
+        io.backIntakeOut.getButton().whileTrue(bothIntakeInCommand).onFalse(backIntakeIdleCommand);
         io.shooter.getButton().whileTrue(beginShootingCommand).onFalse(stopShootingCommand);
         io.payloadUp.getButton().whileTrue(payloadUpCommand).onFalse(payloadIdleCommand);
         io.payloadDown.getButton().whileTrue(payloadDownCommand).onFalse(payloadIdleCommand);
         io.armUp.getButton().whileTrue(armUpCommand).onFalse(new InstantCommand(armUpCommand::cancel));
         io.armDown.getButton().whileTrue(armDownCommand).onFalse(new InstantCommand(armDownCommand::cancel));
 
-        io.frontIntakeInJoystick.getButton().whileTrue(frontIntakeInCommand).onFalse(frontIntakeIdleCommand);
-        io.frontIntakeInJoystick.getButton().whileTrue(backIntakeInCommand).onFalse(backIntakeIdleCommand);
-        io.frontIntakeOutJoystick.getButton().whileTrue(frontIntakeOutCommand).onFalse(frontIntakeIdleCommand);
-        io.frontIntakeOutJoystick.getButton().whileTrue(backIntakeOutCommand).onFalse(backIntakeIdleCommand);
+        io.frontIntakeInJoystick.getButton().whileTrue(bothIntakeInCommand).onFalse(frontIntakeIdleCommand);
+        io.frontIntakeOutJoystick.getButton().whileTrue(bothIntakeOutCommand).onFalse(frontIntakeIdleCommand);
         io.shooterJoystick.getButton().whileTrue(beginShootingCommand).onFalse(stopShootingCommand);
         io.payloadUpJoystick.getButton().whileTrue(payloadUpCommand).onFalse(payloadIdleCommand);
         io.payloadDownJoystick.getButton().whileTrue(payloadDownCommand).onFalse(payloadIdleCommand);

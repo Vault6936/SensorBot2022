@@ -39,7 +39,7 @@ public class shooterCommand extends Command
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        subsystem.shoot(startShooting ? 0.9 : 0.0); //90%
+        subsystem.shoot(startShooting ? 0.65 : 0.0); //65%
     }
     
     

@@ -25,16 +25,16 @@ public class intakeReleaseCommand extends Command
     {
         this.subsystem = subsystem;
         this.state = state;
-        switch (state) {
-            case IN:
-                subsystem.setState(IntakeSubsystem.State.IN);
-                break;
-            case OUT:
-                subsystem.setState(IntakeSubsystem.State.OUT);
-            case IDLE:
-                subsystem.setState(IntakeSubsystem.State.IDLE);
-        }
-        // Use addRequirements() here to declare subsystem dependencies.
+//        switch (state) {
+//            case IN:
+//                subsystem.setState(IntakeSubsystem.State.IN);
+//                break;
+//            case OUT:
+//                subsystem.setState(IntakeSubsystem.State.OUT);
+//            case IDLE:
+//                subsystem.setState(IntakeSubsystem.State.IDLE);
+//        }
+//         Use addRequirements() here to declare subsystem dependencies.
         addRequirements(subsystem);
     }
     
@@ -45,7 +45,7 @@ public class intakeReleaseCommand extends Command
     // Called every time the scheduler runs while the command is scheduled.
     @Override
     public void execute() {
-        subsystem.intakePeriodic();
+//        subsystem.intake();
     }
     
     // Called once the command ends or is interrupted.
